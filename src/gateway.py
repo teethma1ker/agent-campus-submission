@@ -66,7 +66,9 @@ SYSTEM_PROMPT = """你是内容团队的「素材审核与发布排期助手」�
 1. read_material{"material_id":"M01"}          读取素材元数据
 2. check_rules{"material_id":"M01"}            按 content_rules 检查风险（返回 blocker/warning/ok）
 3. query_slots{"material_id":"M01"}            查询与素材同渠道、格式相容、营业时段内且未被占用的时段
-4. save_draft{"material_id":"M01","slot":"19:00"}  仅保存排期草稿（不发布！）
+4. save_draft{"material_id":"M01","slot":"19:00","status":"pending_confirmation"}
+   仅保存排期草稿（不发布！）。status 取 confirmed 或 pending_confirmation；
+   时段冲突/超营业时间/类型不合规时必须是 pending_confirmation（服务端会复核）。
 
 # 硬性约束
 - publish_time 是用户硬性要求：不得把草稿保存到与其不同的时段。同渠道碰撞时只能标记待确认，等用户决定。
@@ -74,9 +76,10 @@ SYSTEM_PROMPT = """你是内容团队的「素材审核与发布排期助手」�
 - 工具返回 error/blocked unconfirmed=false 时，先自行补查或换策略，不要立刻停下。
 
 # 每个素材的决策流程（基于工具结果动态推进）
-- 先 read_material。
-- 若 publish_time 为空：只能建议“常规时段”草稿（不保存）并请求用户确认时间。
-- publish_time 已知：接着 check_rules。
+- 先 read_material，然后无论是否有 publish_time 都必须调用 check_rules（每项素材都要有审核状态）。
+- 若 publish_time 为空：check_rules 后必须调用 query_slots 获取可用时段再结束（不得仅凭规则摘要给建议），
+  只能建议“常规时段”草稿（不保存）并请求用户确认时间；不要在总结里断言具体占用情况，除非 query_slots 已返回。
+- publish_time 已知：check_rules 后继续。
   * blocker → 不保存草稿，标记阻断，向用户报告风险原因。
   * warning → 记录待确认项；时段可用时仍可保存，但草稿状态必须为 pending_confirmation（等待人工复核）。
   * ok → 继续 query_slots。

@@ -18,6 +18,9 @@ test_clean_material_ok (test_tools.CheckRulesTest) ... ok
 test_competitor_blocker (test_tools.CheckRulesTest) ... ok
 test_extreme_word_blocker (test_tools.CheckRulesTest) ... ok
 test_partner_warning (test_tools.CheckRulesTest) ... ok
+test_available_confirmed_ok (test_tools.ConsistencyGuardTest) ... ok
+test_conflict_forced_pending (test_tools.ConsistencyGuardTest) ... ok
+test_off_grid_forced_pending (test_tools.ConsistencyGuardTest) ... ok
 test_channel_isolation (test_tools.QuerySlotsTest) ... ok
 test_missing_time (test_tools.QuerySlotsTest) ... ok
 test_non_integer_time_rejected (test_tools.QuerySlotsTest) ... ok
@@ -33,6 +36,6 @@ test_unknown_action_rejected (test_tools.SchemaTest) ... ok
 test_valid_args_accepted (test_tools.SchemaTest) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 0.241s
+Ran 35 tests in 0.257s
 
 OK

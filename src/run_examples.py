@@ -39,6 +39,8 @@ def main() -> int:
     ap.add_argument("--out", default=None,
                     help="输出目录；默认 mock→examples/，real→examples/real-model/（互不覆盖）")
     ap.add_argument("--today", default=date.today().isoformat())
+    ap.add_argument("--index-only", action="store_true",
+                    help="只根据 --out 下已有 trace 重建 index.md（不重新调用模型）")
     args = ap.parse_args()
 
     if args.out is None:
@@ -53,6 +55,24 @@ def main() -> int:
 
     index_rows = []
     for req in reqs:
+        trace_path = os.path.join(args.out, "traces", f"{req['id']}.trace.json")
+        if args.index_only:
+            try:
+                t = json.load(open(trace_path, encoding="utf-8"))
+            except OSError:
+                print(f"[{req['id']}] 缺少 trace，跳过")
+                continue
+            verdicts = []
+            for e in t["report"]["materials"]:
+                drafts = "无草稿" if not e["draft"] else f"{e['draft']['draft_id']}@{e['draft']['slot']}({e['draft']['status']})"
+                verdicts.append(f"{e['material_id']}:{e['audit_status']}/{drafts}/{e['draft_save_status']}")
+            index_rows.append({
+                "id": req["id"], "scenario": req["scenario"], "acceptance": req.get("acceptance", []),
+                "status": t["status"], "steps": t["report"]["steps"], "tool_calls": t["report"]["tool_calls"],
+                "verdicts": verdicts, "claim_check": t["report"]["claim_check"],
+                "path": " → ".join(s["action"] for s in t["trace"]),
+            })
+            continue
         payload, ctx = make_request_payload(req)
         with open(os.path.join(args.out, "requests", f"{req['id']}.request.json"), "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)

@@ -226,6 +226,10 @@ class Agent:
                 draft_view = {"draft_id": draft["draft_id"], "slot": draft["slot"],
                               "status": draft["status"],
                               "saved_this_run": draft["draft_id"] in saved_this_run}
+                save_obs = next((t["observation"] for t in reversed(m_trace)
+                                 if t["action"] == "save_draft"), None) or {}
+                if save_obs.get("status_adjusted"):
+                    pending.append("系统一致性调整：" + save_obs["status_adjusted"])
                 draft_status = "saved" if draft["draft_id"] in saved_this_run else "existing"
             if dup:
                 draft_status = "duplicate_existing"

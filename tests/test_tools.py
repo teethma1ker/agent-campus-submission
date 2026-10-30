@@ -123,3 +123,24 @@ class SchemaTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ConsistencyGuardTest(unittest.TestCase):
+    """save_draft 服务端一致性：冲突/超时段/类型不合规时强制待确认。"""
+
+    def test_conflict_forced_pending(self):
+        _, reg = fresh()
+        obs = json.loads(reg["save_draft"]("M01", "18:00", status="confirmed"))
+        self.assertEqual(obs["status"], "pending_confirmation")
+        self.assertIn("status_adjusted", obs)
+
+    def test_off_grid_forced_pending(self):
+        _, reg = fresh()
+        obs = json.loads(reg["save_draft"]("M03", "19:30", status="confirmed"))
+        self.assertEqual(obs["status"], "pending_confirmation")
+
+    def test_available_confirmed_ok(self):
+        _, reg = fresh()
+        obs = json.loads(reg["save_draft"]("M08", "10:00", status="confirmed"))
+        self.assertEqual(obs["status"], "confirmed")
+        self.assertNotIn("status_adjusted", obs)

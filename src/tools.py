@@ -224,6 +224,16 @@ def build_save_draft(ctx: dict):
         if status not in ("confirmed", "pending_confirmation"):
             status = "pending_confirmation"
 
+        # 服务端一致性：请求时段不可用/超营业时间/类型不合规时，草稿只能是待确认
+        # （模型传入的 status 不可信；这里按规则核验，避免把冲突的确认草稿写进库）
+        allowed = allowed_slots(ctx["rules"], mat.get("format", "")) or []
+        blocked_slots = {b["slot"] for b in ctx["schedule"].get("blocked_slots", [])}
+        slot_unusable = (slot not in allowed or slot in blocked_slots
+                         or collision(ctx, mat, slot) is not None)
+        requested_status = status
+        if slot_unusable and status != "pending_confirmation":
+            status = "pending_confirmation"
+
         existing = ctx["draft_store"].get(material_id)
         if existing:
             return json.dumps({
@@ -244,11 +254,15 @@ def build_save_draft(ctx: dict):
             "created_at": datetime.now().isoformat(timespec="seconds"),
         }
         ctx["draft_store"][material_id] = draft
-        return json.dumps({
+        payload = {
             "material_id": material_id, "ok": True, "duplicate": False,
             "draft_id": draft["draft_id"], "slot": slot, "status": status,
             "note": "草稿已保存（不会自动发布）",
-        }, ensure_ascii=False)
+        }
+        if status != requested_status:
+            payload["status_adjusted"] = (f"请求 {requested_status} 与规则不符："
+                                          f"该时段不可用/超营业时间/类型限制，已按待确认保存")
+        return json.dumps(payload, ensure_ascii=False)
     return save_draft
 
 

@@ -1,0 +1,183 @@
+{
+  "request_id": "R6-01",
+  "scenario": "保存失败",
+  "mode": "real",
+  "run_date": "2026-10-30",
+  "status": "completed",
+  "report": {
+    "request_id": "R6-01",
+    "date": "2026-10-31",
+    "status": "completed",
+    "status_note": "本批素材已处理完毕",
+    "model_summary": "M08（小红书图文，10:00）审核 ok 且时段可用，但草稿存储服务连续两次返回 HTTP 503，草稿保存失败，未保存任何草稿；建议稍后重试或联系技术排查 draft-store 服务。",
+    "claim_check": {
+      "passed": true,
+      "issues": []
+    },
+    "materials": [
+      {
+        "material_id": "M08",
+        "title": "晨间咖啡图文",
+        "channel": "小红书",
+        "requested_publish_time": "10:00",
+        "hard_requirement": true,
+        "audit_status": "ok",
+        "risk_reasons": [],
+        "missing_fields": [],
+        "suggested_slots": [
+          "10:00",
+          "09:00"
+        ],
+        "requested_slot_status": "available",
+        "draft": null,
+        "draft_save_status": "failed",
+        "pending_confirmations": [
+          "草稿保存失败：草稿存储服务暂不可用（HTTP 503：draft-store unavailable）；本次未保存成功"
+        ],
+        "published": false
+      }
+    ],
+    "saved_this_run": [],
+    "duplicates": [],
+    "failed_saves": [
+      {
+        "material_id": "M08",
+        "error": "草稿存储服务暂不可用（HTTP 503：draft-store unavailable）"
+      },
+      {
+        "material_id": "M08",
+        "error": "草稿存储服务暂不可用（HTTP 503：draft-store unavailable）"
+      }
+    ],
+    "publishing": "disabled：系统只保存草稿，不存在发布能力",
+    "tool_calls": 5,
+    "steps": 6
+  },
+  "trace": [
+    {
+      "step": 1,
+      "thought": "先读取 M08 素材元数据，确认渠道、格式与发布时间等基础信息。",
+      "action": "read_material",
+      "arguments": {
+        "material_id": "M08"
+      },
+      "observation_summary": "channel=小红书 format=图文 publish_time=10:00 missing=[]",
+      "observation": {
+        "material_id": "M08",
+        "title": "晨间咖啡图文",
+        "format": "图文",
+        "channel": "小红书",
+        "theme": "日常内容",
+        "publish_time": "10:00",
+        "publish_due": "2026-10-31",
+        "owner": "沈青",
+        "required": true,
+        "description": "晨间咖啡角随拍，文案已过审。",
+        "missing_fields": []
+      },
+      "decision_basis": "先读取 M08 素材元数据，确认渠道、格式与发布时间等基础信息。"
+    },
+    {
+      "step": 2,
+      "thought": "M08 已读取，publish_time=10:00 已知，下一步按流程检查内容规则风险。",
+      "action": "check_rules",
+      "arguments": {
+        "material_id": "M08"
+      },
+      "observation_summary": "status=ok（无风险）",
+      "observation": {
+        "material_id": "M08",
+        "status": "ok",
+        "reasons": [],
+        "hard_issues": [],
+        "review_issues": []
+      },
+      "decision_basis": "M08 已读取，publish_time=10:00 已知，下一步按流程检查内容规则风险。"
+    },
+    {
+      "step": 3,
+      "thought": "M08 规则检查通过，publish_time=10:00 已知，下一步查询该时段是否可用（注意 10:00 已有 M11 排期，可能冲突）。",
+      "action": "query_slots",
+      "arguments": {
+        "material_id": "M08"
+      },
+      "observation_summary": "requested 10:00→available；suggest=['10:00', '09:00']",
+      "observation": {
+        "material_id": "M08",
+        "format": "图文",
+        "channel": "小红书",
+        "date": "2026-10-31",
+        "requested_slot": {
+          "slot": "10:00",
+          "status": "available",
+          "reason": "",
+          "hard": true
+        },
+        "available_slots": [
+          "10:00",
+          "09:00",
+          "11:00",
+          "12:00",
+          "13:00",
+          "14:00",
+          "16:00",
+          "17:00",
+          "18:00",
+          "19:00",
+          "20:00",
+          "21:00"
+        ],
+        "suggested_slots": [
+          "10:00",
+          "09:00"
+        ]
+      },
+      "decision_basis": "M08 规则检查通过，publish_time=10:00 已知，下一步查询该时段是否可用（注意 10:00 已有 M11 排期，可能冲突）。"
+    },
+    {
+      "step": 4,
+      "thought": "M08 规则检查通过，10:00 时段可用，但已有排期显示 10:00 被 M11 占用（同渠道碰撞需以 query_slots 结果为准，其显示 available），按流程以 publish_time=10:00 保存草稿。",
+      "action": "save_draft",
+      "arguments": {
+        "material_id": "M08",
+        "slot": "10:00",
+        "status": "confirmed"
+      },
+      "observation_summary": "error: 草稿存储服务暂不可用（HTTP 503：draft-store unavailable）",
+      "observation": {
+        "material_id": "M08",
+        "ok": false,
+        "error": "草稿存储服务暂不可用（HTTP 503：draft-store unavailable）"
+      },
+      "decision_basis": "M08 规则检查通过，10:00 时段可用，但已有排期显示 10:00 被 M11 占用（同渠道碰撞需以 query_slots 结果为准，其显示 available），按流程以 publish_time=10:00 保存草稿。"
+    },
+    {
+      "step": 5,
+      "thought": "save_draft 返回 503 瞬时故障，按规则先重试一次保存草稿（M08 规则 ok、10:00 时段可用，仍用原时段与 confirmed 状态）。",
+      "action": "save_draft",
+      "arguments": {
+        "material_id": "M08",
+        "slot": "10:00",
+        "status": "confirmed"
+      },
+      "observation_summary": "error: 草稿存储服务暂不可用（HTTP 503：draft-store unavailable）",
+      "observation": {
+        "material_id": "M08",
+        "ok": false,
+        "error": "草稿存储服务暂不可用（HTTP 503：draft-store unavailable）"
+      },
+      "decision_basis": "save_draft 返回 503 瞬时故障，按规则先重试一次保存草稿（M08 规则 ok、10:00 时段可用，仍用原时段与 confirmed 状态）。"
+    },
+    {
+      "step": 6,
+      "thought": "M08 审核通过、10:00 时段可用，但 save_draft 已重试一次仍返回 503 存储服务不可用，按规则不得声称已保存，应如实报告保存失败并结束。",
+      "action": "finish",
+      "arguments": {
+        "summary": "M08（小红书图文，10:00）审核 ok 且时段可用，但草稿存储服务连续两次返回 HTTP 503，草稿保存失败，未保存任何草稿；建议稍后重试或联系技术排查 draft-store 服务。"
+      },
+      "observation_summary": "会话结束",
+      "decision_basis": "M08 审核通过、10:00 时段可用，但 save_draft 已重试一次仍返回 503 存储服务不可用，按规则不得声称已保存，应如实报告保存失败并结束。"
+    }
+  ],
+  "drafts": []
+}
