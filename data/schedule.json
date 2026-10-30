@@ -1,0 +1,11 @@
+{
+  "schedule_date": "2026-10-31",
+  "occupied": [
+    {"slot": "10:00", "material_id": "M11", "title": "晨间新品图文"},
+    {"slot": "18:00", "material_id": "M09", "title": "品牌周年庆直播预热"},
+    {"slot": "20:00", "material_id": "M10", "title": "用户故事合集·下篇"}
+  ],
+  "blocked_slots": [
+    {"slot": "15:00", "reason": "全员会议，运营无人值守"}
+  ]
+}

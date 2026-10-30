@@ -1,0 +1,161 @@
+[
+  {
+    "id": "R1-01",
+    "scenario": "正常排期",
+    "acceptance": [
+      "正常排期"
+    ],
+    "materials": [
+      "M08",
+      "M07"
+    ],
+    "request": "晨间咖啡图文和双十一福利海报今天按既定时间发。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R1-02",
+    "scenario": "正常排期（第二条执行路径）",
+    "acceptance": [
+      "正常排期"
+    ],
+    "materials": [
+      "M16"
+    ],
+    "request": "限时福利返场今天 18:00 发，走一下排期。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R2-01",
+    "scenario": "素材信息缺失",
+    "acceptance": [
+      "素材信息缺失"
+    ],
+    "materials": [
+      "M04"
+    ],
+    "request": "直播预告周五要上，帮我看看还能不能排。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R3-01",
+    "scenario": "规则风险（极限词）",
+    "acceptance": [
+      "规则风险"
+    ],
+    "materials": [
+      "M02"
+    ],
+    "request": "战报今天发，重点突出销量成绩。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R3-02",
+    "scenario": "规则风险（竞品信息）",
+    "acceptance": [
+      "规则风险"
+    ],
+    "materials": [
+      "M06"
+    ],
+    "request": "测评视频今天发。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R4-01",
+    "scenario": "规则风险（合作方需法务确认）",
+    "acceptance": [
+      "规则风险"
+    ],
+    "materials": [
+      "M05"
+    ],
+    "request": "专访今天 11 点发。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R4-02",
+    "scenario": "时段冲突",
+    "acceptance": [
+      "时段冲突"
+    ],
+    "materials": [
+      "M01"
+    ],
+    "request": "开箱视频今天 18:00 必须发。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R4-03",
+    "scenario": "时段冲突（非整点要求）",
+    "acceptance": [
+      "时段冲突"
+    ],
+    "materials": [
+      "M03"
+    ],
+    "request": "用户故事图文今天 19:30 发。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R5-01",
+    "scenario": "重复提交（首发）",
+    "acceptance": [
+      "重复提交"
+    ],
+    "materials": [
+      "M08"
+    ],
+    "request": "晨间咖啡图文今天 10 点发。",
+    "date": "2026-10-31"
+  },
+  {
+    "id": "R5-02",
+    "scenario": "重复提交（再次提交同一素材）",
+    "acceptance": [
+      "重复提交"
+    ],
+    "materials": [
+      "M01"
+    ],
+    "request": "开箱视频 18:00 再帮忙走一遍，之前好像提交过。",
+    "date": "2026-10-31",
+    "existing_draft": {
+      "M01": {
+        "slot": "18:00",
+        "status": "pending_confirmation"
+      }
+    }
+  },
+  {
+    "id": "R6-01",
+    "scenario": "保存失败",
+    "acceptance": [
+      "保存失败"
+    ],
+    "materials": [
+      "M08"
+    ],
+    "request": "晨间咖啡图文今天 10 点发，保存一下草稿。",
+    "date": "2026-10-31",
+    "faults": {
+      "save_draft": {
+        "error": "草稿存储服务暂不可用（HTTP 503：draft-store unavailable）",
+        "remaining": 99
+      }
+    }
+  },
+  {
+    "id": "R7-01",
+    "scenario": "步数上限（未完成状态）",
+    "acceptance": [
+      "执行上限"
+    ],
+    "materials": [
+      "M01",
+      "M08"
+    ],
+    "request": "这两条随便排一下。",
+    "date": "2026-10-31",
+    "limit_steps": 3
+  }
+]

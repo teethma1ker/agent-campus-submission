@@ -1,0 +1,139 @@
+{
+  "request_id": "R7-01",
+  "scenario": "步数上限（未完成状态）",
+  "mode": "mock",
+  "run_date": "2026-10-30",
+  "status": "incomplete_limit_reached",
+  "report": {
+    "request_id": "R7-01",
+    "date": "2026-10-31",
+    "status": "incomplete_limit_reached",
+    "status_note": "达到执行步数/工具调用上限，存在未完成项",
+    "model_summary": null,
+    "claim_check": {
+      "passed": true,
+      "issues": []
+    },
+    "materials": [
+      {
+        "material_id": "M01",
+        "title": "秋季新品开箱视频",
+        "channel": "视频号",
+        "requested_publish_time": "18:00",
+        "hard_requirement": true,
+        "audit_status": "ok",
+        "risk_reasons": [],
+        "missing_fields": [],
+        "suggested_slots": [
+          "19:00",
+          "20:00"
+        ],
+        "requested_slot_status": "occupied",
+        "draft": null,
+        "draft_save_status": "not_saved",
+        "pending_confirmations": [
+          "硬性时段 18:00 不可用（同渠道（视频号）已有 M09 品牌周年庆直播预热）；建议替代 19:00/20:00，等待用户确认，未擅自改期"
+        ],
+        "published": false
+      },
+      {
+        "material_id": "M08",
+        "title": "晨间咖啡图文",
+        "channel": "小红书",
+        "requested_publish_time": "10:00",
+        "hard_requirement": null,
+        "audit_status": "not_processed",
+        "risk_reasons": [],
+        "missing_fields": [],
+        "suggested_slots": [],
+        "requested_slot_status": null,
+        "draft": null,
+        "draft_save_status": "not_saved",
+        "pending_confirmations": [
+          "本次运行未处理到该素材（执行中断或触达上限）"
+        ],
+        "published": false
+      }
+    ],
+    "saved_this_run": [],
+    "duplicates": [],
+    "failed_saves": [],
+    "publishing": "disabled：系统只保存草稿，不存在发布能力",
+    "tool_calls": 3,
+    "steps": 3
+  },
+  "trace": [
+    {
+      "step": 1,
+      "thought": "先读取素材，确认关键字段是否齐全。",
+      "action": "read_material",
+      "arguments": {
+        "material_id": "M01"
+      },
+      "observation_summary": "channel=视频号 format=视频 publish_time=18:00 missing=[]",
+      "observation": {
+        "material_id": "M01",
+        "title": "秋季新品开箱视频",
+        "format": "视频",
+        "channel": "视频号",
+        "theme": "新品营销",
+        "publish_time": "18:00",
+        "publish_due": "2026-10-31",
+        "owner": "林晓",
+        "required": true,
+        "description": "60 秒新品开箱短视频，封面文案已定稿，突出礼盒质感。",
+        "missing_fields": []
+      },
+      "decision_basis": "先读取素材，确认关键字段是否齐全。"
+    },
+    {
+      "step": 2,
+      "thought": "素材已读取，继续按内容规则检查风险。",
+      "action": "check_rules",
+      "arguments": {
+        "material_id": "M01"
+      },
+      "observation_summary": "status=ok（无风险）",
+      "observation": {
+        "material_id": "M01",
+        "status": "ok",
+        "reasons": [],
+        "hard_issues": [],
+        "review_issues": []
+      },
+      "decision_basis": "素材已读取，继续按内容规则检查风险。"
+    },
+    {
+      "step": 3,
+      "thought": "规则未阻断，查询该素材可用时段。",
+      "action": "query_slots",
+      "arguments": {
+        "material_id": "M01"
+      },
+      "observation_summary": "requested 18:00→occupied（同渠道（视频号）已有 M09 品牌周年庆直播预热）；suggest=['19:00', '20:00']",
+      "observation": {
+        "material_id": "M01",
+        "format": "视频",
+        "channel": "视频号",
+        "date": "2026-10-31",
+        "requested_slot": {
+          "slot": "18:00",
+          "status": "occupied",
+          "reason": "同渠道（视频号）已有 M09 品牌周年庆直播预热",
+          "hard": true
+        },
+        "available_slots": [
+          "19:00",
+          "20:00",
+          "12:00"
+        ],
+        "suggested_slots": [
+          "19:00",
+          "20:00"
+        ]
+      },
+      "decision_basis": "规则未阻断，查询该素材可用时段。"
+    }
+  ],
+  "drafts": []
+}

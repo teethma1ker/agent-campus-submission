@@ -1,0 +1,313 @@
+{
+  "request_id": "R1-01",
+  "scenario": "正常排期",
+  "mode": "mock",
+  "run_date": "2026-10-30",
+  "status": "completed",
+  "report": {
+    "request_id": "R1-01",
+    "date": "2026-10-31",
+    "status": "completed",
+    "status_note": "本批素材已处理完毕",
+    "model_summary": "M08 草稿 D0001@10:00（confirmed）已保存；M07 草稿 D0002@19:00（confirmed）已保存。全程仅保存草稿，未发布任何内容。",
+    "claim_check": {
+      "passed": true,
+      "issues": []
+    },
+    "materials": [
+      {
+        "material_id": "M08",
+        "title": "晨间咖啡图文",
+        "channel": "小红书",
+        "requested_publish_time": "10:00",
+        "hard_requirement": true,
+        "audit_status": "ok",
+        "risk_reasons": [],
+        "missing_fields": [],
+        "suggested_slots": [
+          "10:00",
+          "09:00"
+        ],
+        "requested_slot_status": "available",
+        "draft": {
+          "draft_id": "D0001",
+          "slot": "10:00",
+          "status": "confirmed",
+          "saved_this_run": true
+        },
+        "draft_save_status": "saved",
+        "pending_confirmations": [],
+        "published": false
+      },
+      {
+        "material_id": "M07",
+        "title": "双十一福利海报",
+        "channel": "小红书",
+        "requested_publish_time": "19:00",
+        "hard_requirement": true,
+        "audit_status": "ok",
+        "risk_reasons": [],
+        "missing_fields": [],
+        "suggested_slots": [
+          "19:00",
+          "18:00"
+        ],
+        "requested_slot_status": "available",
+        "draft": {
+          "draft_id": "D0002",
+          "slot": "19:00",
+          "status": "confirmed",
+          "saved_this_run": true
+        },
+        "draft_save_status": "saved",
+        "pending_confirmations": [],
+        "published": false
+      }
+    ],
+    "saved_this_run": [
+      "D0001",
+      "D0002"
+    ],
+    "duplicates": [],
+    "failed_saves": [],
+    "publishing": "disabled：系统只保存草稿，不存在发布能力",
+    "tool_calls": 8,
+    "steps": 9
+  },
+  "trace": [
+    {
+      "step": 1,
+      "thought": "先读取素材，确认关键字段是否齐全。",
+      "action": "read_material",
+      "arguments": {
+        "material_id": "M08"
+      },
+      "observation_summary": "channel=小红书 format=图文 publish_time=10:00 missing=[]",
+      "observation": {
+        "material_id": "M08",
+        "title": "晨间咖啡图文",
+        "format": "图文",
+        "channel": "小红书",
+        "theme": "日常内容",
+        "publish_time": "10:00",
+        "publish_due": "2026-10-31",
+        "owner": "沈青",
+        "required": true,
+        "description": "晨间咖啡角随拍，文案已过审。",
+        "missing_fields": []
+      },
+      "decision_basis": "先读取素材，确认关键字段是否齐全。"
+    },
+    {
+      "step": 2,
+      "thought": "素材已读取，继续按内容规则检查风险。",
+      "action": "check_rules",
+      "arguments": {
+        "material_id": "M08"
+      },
+      "observation_summary": "status=ok（无风险）",
+      "observation": {
+        "material_id": "M08",
+        "status": "ok",
+        "reasons": [],
+        "hard_issues": [],
+        "review_issues": []
+      },
+      "decision_basis": "素材已读取，继续按内容规则检查风险。"
+    },
+    {
+      "step": 3,
+      "thought": "规则未阻断，查询该素材可用时段。",
+      "action": "query_slots",
+      "arguments": {
+        "material_id": "M08"
+      },
+      "observation_summary": "requested 10:00→available；suggest=['10:00', '09:00']",
+      "observation": {
+        "material_id": "M08",
+        "format": "图文",
+        "channel": "小红书",
+        "date": "2026-10-31",
+        "requested_slot": {
+          "slot": "10:00",
+          "status": "available",
+          "reason": "",
+          "hard": true
+        },
+        "available_slots": [
+          "10:00",
+          "09:00",
+          "11:00",
+          "12:00",
+          "13:00",
+          "14:00",
+          "16:00",
+          "17:00",
+          "18:00",
+          "19:00",
+          "20:00",
+          "21:00"
+        ],
+        "suggested_slots": [
+          "10:00",
+          "09:00"
+        ]
+      },
+      "decision_basis": "规则未阻断，查询该素材可用时段。"
+    },
+    {
+      "step": 4,
+      "thought": "M08 硬性时段 10:00 可用且无风险，保存确认草稿。",
+      "action": "save_draft",
+      "arguments": {
+        "material_id": "M08",
+        "slot": "10:00",
+        "status": "confirmed"
+      },
+      "observation_summary": "saved draft_id=D0001 slot=10:00 status=confirmed",
+      "observation": {
+        "material_id": "M08",
+        "ok": true,
+        "duplicate": false,
+        "draft_id": "D0001",
+        "slot": "10:00",
+        "status": "confirmed",
+        "note": "草稿已保存（不会自动发布）"
+      },
+      "decision_basis": "M08 硬性时段 10:00 可用且无风险，保存确认草稿。"
+    },
+    {
+      "step": 5,
+      "thought": "先读取素材，确认关键字段是否齐全。",
+      "action": "read_material",
+      "arguments": {
+        "material_id": "M07"
+      },
+      "observation_summary": "channel=小红书 format=图文 publish_time=19:00 missing=[]",
+      "observation": {
+        "material_id": "M07",
+        "title": "双十一福利海报",
+        "format": "图文",
+        "channel": "小红书",
+        "theme": "大促营销",
+        "publish_time": "19:00",
+        "publish_due": "2026-10-31",
+        "owner": "林晓",
+        "required": true,
+        "description": "福利海报：限时折扣清单，视觉稿已出。",
+        "missing_fields": []
+      },
+      "decision_basis": "先读取素材，确认关键字段是否齐全。"
+    },
+    {
+      "step": 6,
+      "thought": "素材已读取，继续按内容规则检查风险。",
+      "action": "check_rules",
+      "arguments": {
+        "material_id": "M07"
+      },
+      "observation_summary": "status=ok（无风险）",
+      "observation": {
+        "material_id": "M07",
+        "status": "ok",
+        "reasons": [],
+        "hard_issues": [],
+        "review_issues": []
+      },
+      "decision_basis": "素材已读取，继续按内容规则检查风险。"
+    },
+    {
+      "step": 7,
+      "thought": "规则未阻断，查询该素材可用时段。",
+      "action": "query_slots",
+      "arguments": {
+        "material_id": "M07"
+      },
+      "observation_summary": "requested 19:00→available；suggest=['19:00', '18:00']",
+      "observation": {
+        "material_id": "M07",
+        "format": "图文",
+        "channel": "小红书",
+        "date": "2026-10-31",
+        "requested_slot": {
+          "slot": "19:00",
+          "status": "available",
+          "reason": "",
+          "hard": true
+        },
+        "available_slots": [
+          "19:00",
+          "18:00",
+          "20:00",
+          "17:00",
+          "21:00",
+          "16:00",
+          "14:00",
+          "13:00",
+          "12:00",
+          "11:00",
+          "10:00",
+          "09:00"
+        ],
+        "suggested_slots": [
+          "19:00",
+          "18:00"
+        ]
+      },
+      "decision_basis": "规则未阻断，查询该素材可用时段。"
+    },
+    {
+      "step": 8,
+      "thought": "M07 硬性时段 19:00 可用且无风险，保存确认草稿。",
+      "action": "save_draft",
+      "arguments": {
+        "material_id": "M07",
+        "slot": "19:00",
+        "status": "confirmed"
+      },
+      "observation_summary": "saved draft_id=D0002 slot=19:00 status=confirmed",
+      "observation": {
+        "material_id": "M07",
+        "ok": true,
+        "duplicate": false,
+        "draft_id": "D0002",
+        "slot": "19:00",
+        "status": "confirmed",
+        "note": "草稿已保存（不会自动发布）"
+      },
+      "decision_basis": "M07 硬性时段 19:00 可用且无风险，保存确认草稿。"
+    },
+    {
+      "step": 9,
+      "thought": "所有素材已处理完毕，按各步工具返回汇总结果。",
+      "action": "finish",
+      "arguments": {
+        "summary": "M08 草稿 D0001@10:00（confirmed）已保存；M07 草稿 D0002@19:00（confirmed）已保存。全程仅保存草稿，未发布任何内容。"
+      },
+      "observation_summary": "会话结束",
+      "decision_basis": "所有素材已处理完毕，按各步工具返回汇总结果。"
+    }
+  ],
+  "drafts": [
+    {
+      "draft_id": "D0001",
+      "material_id": "M08",
+      "title": "晨间咖啡图文",
+      "channel": "小红书",
+      "format": "图文",
+      "slot": "10:00",
+      "status": "confirmed",
+      "created_at": "2026-10-30T14:14:17"
+    },
+    {
+      "draft_id": "D0002",
+      "material_id": "M07",
+      "title": "双十一福利海报",
+      "channel": "小红书",
+      "format": "图文",
+      "slot": "19:00",
+      "status": "confirmed",
+      "created_at": "2026-10-30T14:14:17"
+    }
+  ]
+}

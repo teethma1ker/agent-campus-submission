@@ -1,0 +1,120 @@
+{
+  "id": "R1-01",
+  "date": "2026-10-31",
+  "channel": "（见各素材）",
+  "theme": "正常排期",
+  "request": "晨间咖啡图文和双十一福利海报今天按既定时间发。",
+  "materials": [
+    {
+      "id": "M08",
+      "fields": {
+        "title": "晨间咖啡图文",
+        "format": "图文",
+        "channel": "小红书",
+        "theme": "日常内容",
+        "publish_time": "10:00",
+        "publish_due": "2026-10-31",
+        "required": true
+      },
+      "description": "晨间咖啡角随拍，文案已过审。"
+    },
+    {
+      "id": "M07",
+      "fields": {
+        "title": "双十一福利海报",
+        "format": "图文",
+        "channel": "小红书",
+        "theme": "大促营销",
+        "publish_time": "19:00",
+        "publish_due": "2026-10-31",
+        "required": true
+      },
+      "description": "福利海报：限时折扣清单，视觉稿已出。"
+    }
+  ],
+  "existing_drafts": [],
+  "schedule": {
+    "schedule_date": "2026-10-31",
+    "occupied": [
+      {
+        "slot": "10:00",
+        "material_id": "M11",
+        "title": "晨间新品图文"
+      },
+      {
+        "slot": "18:00",
+        "material_id": "M09",
+        "title": "品牌周年庆直播预热"
+      },
+      {
+        "slot": "20:00",
+        "material_id": "M10",
+        "title": "用户故事合集·下篇"
+      }
+    ],
+    "blocked_slots": [
+      {
+        "slot": "15:00",
+        "reason": "全员会议，运营无人值守"
+      }
+    ]
+  },
+  "rules": {
+    "version": "2026-10-30",
+    "business_hours": {
+      "start": "09:00",
+      "end": "21:00"
+    },
+    "blocked_terms": [
+      {
+        "term": "第一",
+        "type": "极限词",
+        "reason": "含极限词「第一」，存在广告法合规风险，禁止发布"
+      },
+      {
+        "term": "最便宜",
+        "type": "极限词",
+        "reason": "含极限词「最便宜」，存在广告法合规风险，禁止发布"
+      }
+    ],
+    "entity_rules": [
+      {
+        "entity": "星辰科技",
+        "level": "warning",
+        "message": "涉及合作方「星辰科技」，内容需法务二审确认"
+      },
+      {
+        "entity": "竞品发布会",
+        "level": "blocker",
+        "message": "涉及竞品发布信息，按内容规范禁止发布"
+      }
+    ],
+    "type_slot_rules": [
+      {
+        "format": "视频",
+        "slots": [
+          "10:00",
+          "12:00",
+          "18:00",
+          "19:00",
+          "20:00"
+        ],
+        "message": "视频类内容仅允许在 10:00/12:00/18:00/19:00/20:00 投放"
+      },
+      {
+        "format": "直播",
+        "slots": [
+          "19:00",
+          "20:00",
+          "21:00"
+        ],
+        "message": "直播类内容仅允许在 19:00/20:00/21:00 开播"
+      },
+      {
+        "format": "图文",
+        "slots": "ALL",
+        "message": "图文类内容可在营业时段任意整点投放"
+      }
+    ]
+  }
+}

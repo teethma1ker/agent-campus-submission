@@ -1,0 +1,38 @@
+test_resubmit_existing_draft_not_duplicated (test_scenarios.DuplicateSubmitTest) ... ok
+test_two_submissions_same_store_one_draft (test_scenarios.DuplicateSubmitTest)
+模拟同一素材先后两次提交：同一草稿库只产生一份草稿。 ... ok
+test_fake_save_success_flagged (test_scenarios.GuardrailTest) ... ok
+test_publish_claim_flagged (test_scenarios.GuardrailTest) ... ok
+test_step_limit_returns_incomplete (test_scenarios.LimitTest) ... ok
+test_tool_call_limit_returns_incomplete (test_scenarios.LimitTest) ... ok
+test_missing_time_no_draft_and_pending (test_scenarios.MissingInfoTest) ... ok
+test_normal_schedule_saves_confirmed_draft (test_scenarios.NormalScheduleTest) ... ok
+test_published_always_false (test_scenarios.NormalScheduleTest) ... ok
+test_garbage_output_then_finish (test_scenarios.ProtocolTest) ... ok
+test_blocker_no_draft (test_scenarios.RuleRiskTest) ... ok
+test_warning_draft_pending_confirmation (test_scenarios.RuleRiskTest) ... ok
+test_save_failure_reported_not_faked (test_scenarios.SaveFailureTest) ... ok
+test_conflict_keeps_hard_time_and_marks_pending (test_scenarios.SlotConflictTest) ... ok
+test_off_grid_time_conflict (test_scenarios.SlotConflictTest) ... ok
+test_clean_material_ok (test_tools.CheckRulesTest) ... ok
+test_competitor_blocker (test_tools.CheckRulesTest) ... ok
+test_extreme_word_blocker (test_tools.CheckRulesTest) ... ok
+test_partner_warning (test_tools.CheckRulesTest) ... ok
+test_channel_isolation (test_tools.QuerySlotsTest) ... ok
+test_missing_time (test_tools.QuerySlotsTest) ... ok
+test_non_integer_time_rejected (test_tools.QuerySlotsTest) ... ok
+test_occupied_slot_suggests_nearest (test_tools.QuerySlotsTest) ... ok
+test_video_outside_allowed_slots (test_tools.QuerySlotsTest) ... ok
+test_missing_fields_reported (test_tools.ReadMaterialTest) ... ok
+test_unknown_material (test_tools.ReadMaterialTest) ... ok
+test_fault_injection_fails_then_recovers (test_tools.SaveDraftTest) ... ok
+test_invalid_slot (test_tools.SaveDraftTest) ... ok
+test_save_then_duplicate (test_tools.SaveDraftTest) ... ok
+test_missing_args_rejected (test_tools.SchemaTest) ... ok
+test_unknown_action_rejected (test_tools.SchemaTest) ... ok
+test_valid_args_accepted (test_tools.SchemaTest) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.241s
+
+OK
